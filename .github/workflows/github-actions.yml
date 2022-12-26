@@ -1,15 +1,13 @@
 name: github-actions
 run-name: ${{ github.actor }} is learning GitHub Actions
-on: 
-  push:
-    branches:
-      - master
+on: [push]
 jobs:
   check-bats-version:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: |
-        echo "v1-$(TZ=Asia/Tokyo date +%Y%m%d-%H%M%S)" > TAG_NAME
-        git tag $(cat TAG_NAME)
-        git push origin $(cat TAG_NAME)
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+      - run: npm install -g bats
+      - run: bats -v
