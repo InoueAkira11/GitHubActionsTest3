@@ -1,0 +1,6 @@
+.DS_Store
+.env
+src/shunit2/
+log.txt
+__pycache__/
+.venv/
